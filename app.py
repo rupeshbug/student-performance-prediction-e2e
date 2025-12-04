@@ -17,38 +17,52 @@ def training():
     os.system("python main.py")
     return "Training Successful!" 
 
+# Define valid ranges for each input (from experimentation in input_validation.ipynb using IQR)
+valid_ranges = {
+    'fixed acidity': [3.95, 12.35],
+    'volatile acidity': [0.02, 1.02],
+    'citric acid': [0.0, 0.91],
+    'residual sugar': [0.85, 3.65],
+    'chlorides': [0.04, 0.12],
+    'free sulfur dioxide': [1.0, 42.0],
+    'total sulfur dioxide': [6.0, 122.0],
+    'density': [0.99, 1.0],
+    'pH': [2.92, 3.68],
+    'sulphates': [0.28, 1.0],
+    'alcohol': [7.1, 13.5]
+}
+
 # route to show the predictions in a web UI
-@app.route('/predict', methods=['POST','GET']) 
+@app.route('/predict', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
         try:
-            #  reading the inputs given by the user
-            fixed_acidity =float(request.form['fixed_acidity'])
-            volatile_acidity =float(request.form['volatile_acidity'])
-            citric_acid =float(request.form['citric_acid'])
-            residual_sugar =float(request.form['residual_sugar'])
-            chlorides =float(request.form['chlorides'])
-            free_sulfur_dioxide =float(request.form['free_sulfur_dioxide'])
-            total_sulfur_dioxide =float(request.form['total_sulfur_dioxide'])
-            density =float(request.form['density'])
-            pH =float(request.form['pH'])
-            sulphates =float(request.form['sulphates'])
-            alcohol =float(request.form['alcohol'])
-       
-         
-            data = [fixed_acidity,volatile_acidity,citric_acid,residual_sugar,chlorides,free_sulfur_dioxide,total_sulfur_dioxide,density,pH,sulphates,alcohol]
-            data = np.array(data).reshape(1, 11)
-            
-            obj = PredictionPipeline()
-            predict = obj.predict(data)
-            pred_value = float(predict[0])       
-            pred_value = round(pred_value, 2) 
+            # Read user inputs
+            user_input = {}
+            for feature in valid_ranges.keys():
+                val = float(request.form[feature.replace(' ', '_')])
+                # Validate against min/max
+                min_val, max_val = valid_ranges[feature]
+                if val < min_val or val > max_val:
+                    return render_template(
+                        'index.html',
+                        error=f"Error: {feature} must be between {min_val} and {max_val}."
+                    )
+                user_input[feature] = [val]
 
-            return render_template('results.html', prediction = str(pred_value))
+            # Convert to DataFrame with proper column names
+            input_df = pd.DataFrame(user_input)
+
+            # Make prediction
+            obj = PredictionPipeline()
+            prediction = obj.predict(input_df)
+            pred_value = round(float(prediction[0]), 2)  # 2 decimal places
+
+            return render_template('results.html', prediction=f"{pred_value}/10")
 
         except Exception as e:
-            print('The Exception message is: ',e)
-            return 'something is wrong'
+            print('The Exception message is:', e)
+            return render_template('index.html', error="Something went wrong. Check your inputs!")
 
     else:
         return render_template('index.html')

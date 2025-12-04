@@ -630,3 +630,29 @@ x==========x]
 [2025-12-04 16:15:40,104: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:15:40] "POST /predict HTTP/1.1" 200 -]
 [2025-12-04 16:17:24,110: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:17:24] "GET / HTTP/1.1" 200 -]
 [2025-12-04 16:18:00,620: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:18:00] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:20:38,786: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.65:8080]
+[2025-12-04 16:20:38,786: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2025-12-04 16:20:41,981: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:20:41] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:21:38,270: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:21:38] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:24:43,916: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.1.65:8080]
+[2025-12-04 16:24:43,916: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2025-12-04 16:24:49,016: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:24:49] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:25:19,432: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:25:19] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:25:27,897: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:25:27] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:25:58,771: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:25:58] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:26:01,721: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:01] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:15,384: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:15] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:16,054: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:16] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:16,474: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:16] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:16,632: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:16] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:16,824: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:16] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:26:45,792: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:26:45] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:27:15,865: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:27:15] "GET / HTTP/1.1" 200 -]
+[2025-12-04 16:27:56,567: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:27:56] "POST /predict HTTP/1.1" 200 -]
+[2025-12-04 16:27:59,568: INFO: _internal: 127.0.0.1 - - [04/Dec/2025 16:27:59] "GET / HTTP/1.1" 200 -]
