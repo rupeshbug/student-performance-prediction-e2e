@@ -1041,3 +1041,77 @@ Traceback (most recent call last):
     logger.info(f"Best model from training stage: {best_model[0]} with RMSE={best_model[2]}")
                                                                              ~~~~~~~~~~^^^
 IndexError: tuple index out of range
+[2025-12-06 11:57:06,756: INFO: main: >>>>>> stage Data Ingestion Stage started <<<<<<]
+[2025-12-06 11:57:06,756: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-12-06 11:57:06,756: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-12-06 11:57:06,756: INFO: common: yaml file: schema.yaml loaded successfully]
+[2025-12-06 11:57:06,756: INFO: common: created directory at: artifacts]
+[2025-12-06 11:57:06,756: INFO: common: created directory at: artifacts/data_ingestion]
+[2025-12-06 11:57:07,560: INFO: data_ingestion: artifacts/data_ingestion/data.zip downloaded with following ingo: 
+Connection: close
+Content-Length: 23329
+Cache-Control: max-age=300
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
+Content-Type: application/zip
+ETag: "c69888a4ae59bc5a893392785a938ccd4937981c06ba8a9d6a21aa52b4ab5b6e"
+Strict-Transport-Security: max-age=31536000
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+X-GitHub-Request-Id: 3A9F:4F0F6:52C32:108A74:6933BA9F
+Accept-Ranges: bytes
+Date: Sat, 06 Dec 2025 06:12:07 GMT
+Via: 1.1 varnish
+X-Served-By: cache-bom-vanm7210082-BOM
+X-Cache: HIT
+X-Cache-Hits: 0
+X-Timer: S1765001527.323390,VS0,VE1
+Vary: Authorization,Accept-Encoding
+Access-Control-Allow-Origin: *
+Cross-Origin-Resource-Policy: cross-origin
+X-Fastly-Request-ID: aef0b52f292629306900d77c8572cb88a508ccf4
+Expires: Sat, 06 Dec 2025 06:17:07 GMT
+Source-Age: 187
+
+]
+[2025-12-06 11:57:07,583: INFO: main: >>>>>> stage Data Ingestion Stage completed <<<<<<
+
+x==========x]
+[2025-12-06 11:57:07,583: INFO: main: >>>>>> stage Data Validation Stage started <<<<<<]
+[2025-12-06 11:57:07,594: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-12-06 11:57:07,596: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-12-06 11:57:07,599: INFO: common: yaml file: schema.yaml loaded successfully]
+[2025-12-06 11:57:07,600: INFO: common: created directory at: artifacts]
+[2025-12-06 11:57:07,601: INFO: common: created directory at: artifacts/data_validation]
+[2025-12-06 11:57:07,630: INFO: main: >>>>>> stage Data Validation Stage completed <<<<<<
+
+x==========x]
+[2025-12-06 11:57:07,631: INFO: main: >>>>>> stage Data Transformation Stage started <<<<<<]
+[2025-12-06 11:57:07,634: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-12-06 11:57:07,636: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-12-06 11:57:07,637: INFO: common: yaml file: schema.yaml loaded successfully]
+[2025-12-06 11:57:07,638: INFO: common: created directory at: artifacts]
+[2025-12-06 11:57:07,638: INFO: common: created directory at: artifacts/data_transformation]
+[2025-12-06 11:57:07,654: INFO: data_transformation: Splitted data into training and test sets]
+[2025-12-06 11:57:07,654: INFO: data_transformation: (1199, 12)]
+[2025-12-06 11:57:07,654: INFO: data_transformation: (400, 12)]
+[2025-12-06 11:57:07,654: INFO: main: >>>>>> stage Data Transformation Stage completed <<<<<<
+
+x==========x]
+[2025-12-06 11:57:07,659: INFO: main: >>>>>> stage ModelTrainer Stage started <<<<<<]
+[2025-12-06 11:57:07,661: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-12-06 11:57:07,662: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-12-06 11:57:07,664: INFO: common: yaml file: schema.yaml loaded successfully]
+[2025-12-06 11:57:07,665: INFO: common: created directory at: artifacts]
+[2025-12-06 11:57:07,666: INFO: common: created directory at: artifacts/model_trainer]
+[2025-12-06 11:57:51,248: INFO: model_trainer: All models saved at: artifacts/model_trainer\all_models.joblib]
+[2025-12-06 11:57:51,257: INFO: model_trainer: Best model (XGBoost) saved at: artifacts/model_trainer\best_model.joblib]
+[2025-12-06 11:57:51,257: INFO: model_trainer: Best model: XGBoost with RMSE=0.5771752365783981]
+[2025-12-06 11:57:51,262: ERROR: main: tuple index out of range]
+Traceback (most recent call last):
+  File "C:\Users\Lenovo\Desktop\student-performance-prediction\main.py", line 42, in <module>
+    model_trainer.initiate_model_training()
+  File "C:\Users\Lenovo\Desktop\student-performance-prediction\src\datascience\pipeline\model_trainer.py", line 17, in initiate_model_training
+    logger.info(f"Best model from training stage: {best_model[0]} with RMSE={best_model[2]}")
+                                                                             ~~~~~~~~~~^^^
+IndexError: tuple index out of range

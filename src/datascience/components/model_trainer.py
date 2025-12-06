@@ -93,22 +93,27 @@ class ModelTrainer:
                 # Add model to dictionary for evaluation
                 all_models[name] = model
                 
-                # Track best model
+                # Update best model
                 if rmse < best_rmse:
                     best_rmse = rmse
-                    best_model = (name, model, model_path)
+                    best_model_info = {
+                        "name": name,
+                        "model": model,
+                        "rmse": rmse,
+                        "path": model_path
+                    }
                     
-        # Save all models as one dictionary
+        # Save all models dictionary
         all_models_path = os.path.join(self.config.root_dir, "all_models.joblib")
         joblib.dump(all_models, all_models_path)
         logger.info(f"All models saved at: {all_models_path}")
         
-        # Save the best model separately
+        # Save best model separately
         best_model_path = os.path.join(self.config.root_dir, "best_model.joblib")
-        joblib.dump(best_model[1], best_model_path)
-        logger.info(f"Best model ({best_model[0]}) saved at: {best_model_path}")
+        joblib.dump(best_model_info["model"], best_model_path)
+        logger.info(f"Best model ({best_model_info['name']}) saved at: {best_model_path}")
+        logger.info(f"Best model: {best_model_info['name']} with RMSE={best_model_info['rmse']}")
+
+        return best_model_info
         
-        logger.info(f"Best model: {best_model[0]} with RMSE={best_rmse}")
-        return best_model, best_model_path
-                
                 
