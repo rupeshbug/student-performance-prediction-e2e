@@ -14,12 +14,6 @@ prediction_pipeline = PredictionPipeline()
 def homePage():
     return render_template("index.html")
 
-# route to train the pipeline
-@app.route('/train', methods=['GET'])  
-def training():
-    os.system("python main.py")
-    return "Training Successful!" 
-
 # Define valid ranges for each input (from experimentation in input_validation.ipynb using IQR)
 valid_ranges = {
     'fixed acidity': [3.95, 12.35],
