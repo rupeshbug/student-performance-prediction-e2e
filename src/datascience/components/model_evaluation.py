@@ -30,37 +30,47 @@ class ModelEvaluation:
     def log_into_mlflow(self):
 
         test_data = pd.read_csv(self.config.test_data_path)
-        model = joblib.load(self.config.model_path)
-
         test_x = test_data.drop([self.config.target_column], axis=1)
         test_y = test_data[[self.config.target_column]]
-
+        
+        # Load all trained models
+        model_dict = joblib.load(self.config.model_path)
 
         mlflow.set_registry_uri(self.config.mlflow_uri)
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+        
+        # Evaluate each model
+        for model_name, model in model_dict.items():
+            print(f"\n🔍 Evaluating model: {model_name}")
 
-        with mlflow.start_run():
+            params = self.config.all_params.get(model_name, {})
 
-            predicted_qualities = model.predict(test_x)
+            with mlflow.start_run(run_name=f"{model_name}_evaluation"):
+                preds = model.predict(test_x)
+                rmse, mae, r2 = self.eval_metrics(test_y, preds)
 
-            (rmse, mae, r2) = self.eval_metrics(test_y, predicted_qualities)
-            
-            # Saving metrics as local
-            scores = {"rmse": rmse, "mae": mae, "r2": r2}
-            save_json(path=Path(self.config.metric_file_name), data=scores)
+                # Save metrics locally
+                metrics = {"rmse": rmse, "mae": mae, "r2": r2}
+                local_metric_file = Path(str(self.config.metric_file_name).replace(".json", f"_{model_name}.json"))
+                save_json(path=local_metric_file, data=metrics)
 
-            mlflow.log_params(self.config.all_params)
+                # Log parameters and metrics to MLflow
+                mlflow.log_params(params)
+                mlflow.log_metric("rmse", rmse)
+                mlflow.log_metric("mae", mae)
+                mlflow.log_metric("r2", r2)
 
-            mlflow.log_metric("rmse", rmse)
-            mlflow.log_metric("r2", r2)
-            mlflow.log_metric("mae", mae)
+                # Log model to MLflow
+                if tracking_url_type_store != "file":
+                    mlflow.sklearn.log_model(
+                        model,
+                        artifact_path="model",
+                        registered_model_name=model_name
+                    )
+                else:
+                    mlflow.sklearn.log_model(model, "model")
 
-
-            # Model registry does not work with file store
-            if tracking_url_type_store != "file":
-                mlflow.sklearn.log_model(model, "model", registered_model_name="ElasticnetModel")
-            else:
-                mlflow.sklearn.log_model(model, "model")
+            print(f"✅ Logged {model_name} to MLflow successfully.")
     
 
 
